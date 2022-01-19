@@ -1,0 +1,1 @@
+browserify js/index.js --s Game --outfile js/dist/game.js

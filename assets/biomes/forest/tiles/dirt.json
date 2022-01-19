@@ -1,0 +1,10 @@
+{
+    "texture": "dirt.png",
+    "layer": 1,
+    "objects": [
+            {"type": "dry_foglie", "spread": 0.01}, 
+            {"type": "rock", "spread": 0.0035}, 
+            {"type": "palm_tree", "spread": 0.01},
+            {"type": "dry_tree", "spread": 0.01}
+        ]
+}

@@ -1,0 +1,11 @@
+{
+    "texture": "dry_grass.png",
+    "layer": 0,
+    "objects": [
+            {"type": "dry_foglie", "spread": 0.025}, 
+            {"type": "foglie", "spread": 0.00125}, 
+            {"type": "rock", "spread": 0.005}, 
+            {"type": "palm_tree", "spread": 0.0175},
+            {"type": "bush", "spread": 0.01}
+        ]
+}

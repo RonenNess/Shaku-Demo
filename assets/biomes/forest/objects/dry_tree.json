@@ -1,0 +1,5 @@
+{
+    "textures": [["forest.png", [512,128,128,128]], ["forest.png", [640,128,128,128]], ["forest.png", [768,128,128,128]]],
+    "layer": 2,
+    "block_radius": 15
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shaku Game Demo</title>
+    <meta name="description" content="This is a demo project made with Shaku.JS.">
+    <meta name="author" content="Ronen Ness">
+    <script src="js/external/shaku.js"></script>
+    <script src="js/external/perlin.js"></script>
+      
+    <style>
+      body, html {
+        height: 100%;
+        margin:0; 
+        overflow:hidden;
+      }
+
+      .bg {
+        /* The image used */
+        background-image: url("assets/cover.jpg");
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
+
+  </head>
+  <body class="bg">
+    <p id="loading-msg" style="color:white; text-align: center; font-size: 4em; position: fixed; bottom: 0.75em; width:100%">Loading...</p>
+  </body>
+  <script src="js/dist/game.js"></script>
+</html>

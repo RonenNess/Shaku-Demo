@@ -161,7 +161,7 @@ class Area
 }
 
 // set area size in tiles and pixels
-Area.sizeInTiles = 5;
+Area.sizeInTiles = 7;
 Area.sizeInPixels = TileType.sizeInPixels * Area.sizeInTiles;
 
 // export the area

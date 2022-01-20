@@ -44,6 +44,7 @@ class Area
                 let sprite = new Shaku.gfx.Sprite(tileType.texture);
                 sprite.position.set(i * TileType.sizeInPixels, j * TileType.sizeInPixels);
                 sprite.size.copy(tileType.texture.size);
+                sprite.sourceRect = tileType.sourceRect || undefined;
                 this._tiles[tileType.layer].add(sprite);
 
             }

@@ -29,6 +29,11 @@ class TileType
 
         // load texture
         this.texture = await Shaku.assets.loadTexture(this._root + 'tiles/' + data.texture + antiCache);
+
+        // source rect
+        if (data.source) {
+            this.sourceRect = new Shaku.utils.Rectangle(data.source[0], data.source[1], data.source[2], data.source[3]);
+        }
     }
 
     /**

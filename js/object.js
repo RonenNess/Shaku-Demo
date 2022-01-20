@@ -28,12 +28,11 @@ class StaticObject
             // add shadow
             if (layer >= 1) {
                 let shadow = sprite.clone();
-                shadow.color = new Shaku.utils.Color(0,0,0,0.15);
+                shadow.color = new Shaku.utils.Color(0,0,0,0.35);
                 shadow.size.y *= 1.15;
-                shadow.position.x -= 50;
-                shadow.position.y += 25;
+                shadow.position.x += 40;
+                shadow.position.y -= 55;
                 shadow.rotation += 0.15;
-                shadow.origin.y = 0.9;
                 objectSpriteGroups[layer-1].add(shadow);
             }
         }

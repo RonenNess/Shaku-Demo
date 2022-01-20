@@ -1,5 +1,6 @@
 {
-    "texture": "grass.png",
+    "texture": "tiles.png",
+    "source": [0,256,256,256],
     "layer": 1,
     "objects": [
             {"type": "dry_foglie", "spread": 0.0015}, 

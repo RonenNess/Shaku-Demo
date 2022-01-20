@@ -1,5 +1,6 @@
 {
-    "texture": "rough_dirt.png",
+    "texture": "tiles.png",
+    "source": [256,256,256,256],
     "layer": 0,
     "objects": [
             {"type": "dry_foglie", "spread": 0.005}, 

@@ -208,12 +208,11 @@ class StaticObject
             // add shadow
             if (layer >= 1) {
                 let shadow = sprite.clone();
-                shadow.color = new Shaku.utils.Color(0,0,0,0.15);
+                shadow.color = new Shaku.utils.Color(0,0,0,0.35);
                 shadow.size.y *= 1.15;
-                shadow.position.x -= 50;
-                shadow.position.y += 25;
+                shadow.position.x += 40;
+                shadow.position.y -= 55;
                 shadow.rotation += 0.15;
-                shadow.origin.y = 0.9;
                 objectSpriteGroups[layer-1].add(shadow);
             }
         }
@@ -499,6 +498,11 @@ class TileType
 
         // load texture
         this.texture = await Shaku.assets.loadTexture(this._root + 'tiles/' + data.texture + antiCache);
+
+        // source rect
+        if (data.source) {
+            this.sourceRect = new Shaku.utils.Rectangle(data.source[0], data.source[1], data.source[2], data.source[3]);
+        }
     }
 
     /**
@@ -875,6 +879,7 @@ class Area
                 let sprite = new Shaku.gfx.Sprite(tileType.texture);
                 sprite.position.set(i * TileType.sizeInPixels, j * TileType.sizeInPixels);
                 sprite.size.copy(tileType.texture.size);
+                sprite.sourceRect = tileType.sourceRect || undefined;
                 this._tiles[tileType.layer].add(sprite);
 
             }

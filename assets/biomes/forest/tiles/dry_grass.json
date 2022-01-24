@@ -1,5 +1,6 @@
 {
     "texture": "tiles.png",
+    "overlay_texture": "tiles_overlay.png",
     "source": [256,0,256,256],
     "layer": 0,
     "objects": [

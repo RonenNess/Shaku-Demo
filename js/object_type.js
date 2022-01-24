@@ -1,4 +1,3 @@
-
 // store cache for 1 hour
 const antiCache = '?q=' + Math.floor(Date.now() / (1000 * 60 * 60));
 
@@ -52,13 +51,16 @@ class ObjectType
      * Generate base sprite.
      * If index is not provided, will pick randomly.
      */
-    generateBaseSprite(index)
+    generateBaseSprite(srandom, index)
     {
         if (index === undefined) {
-            index = Math.floor(Math.random() * this.texturesCount);
+            index = Math.floor(srandom.random() * this.texturesCount);
         }
 
         let rect = this._data.textures[index][1];
+        if (!rect) {
+            throw new Error("Invalid source rect!");
+        }
         return new Shaku.gfx.Sprite(this._data.textures[index][2], new Shaku.utils.Rectangle(rect[0], rect[1], rect[2], rect[3]));
     }
 
@@ -82,13 +84,16 @@ class ObjectType
      * Generate top sprite.
      * If index is not provided, will pick randomly.
      */
-    generateTopSprite(index)
+    generateTopSprite(srandom, index)
     {
         if (index === undefined) {
-            index = Math.floor(Math.random() * this.topTexturesCount);
+            index = Math.floor(srandom.random() * this.topTexturesCount);
         }
 
         let rect = this._data.textures_top[index][1];
+        if (!rect) {
+            throw new Error("Invalid source rect!");
+        }
         return new Shaku.gfx.Sprite(this._data.textures_top[index][2], new Shaku.utils.Rectangle(rect[0], rect[1], rect[2], rect[3]));
     }
     

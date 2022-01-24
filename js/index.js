@@ -24,38 +24,54 @@ const _world = new World();
       // start the game
       function startGame()
       {
+        // hide cover page
         document.body.onclick = null;
         document.getElementById("loading-msg").remove();
 
-        // start world
-        _world.start();
+        {
+          // start world
+          _world.start();
 
-        // do a single main loop step and request the next step
-        function step() 
-        {  
-          // start a new frame and clear screen
-          Shaku.startFrame();
-          Shaku.gfx.clear(Shaku.utils.Color.cornflowerblue);
+          // start timer to update server
+          setInterval(() => {
+            let player = _world.player;
+            socket.emit("update", [Math.round(player.position.x), Math.round(player.position.y), Math.round(player.direction * 1000)]);
+          }, 1000 / 24);
 
-          // make fullscreen
-          Shaku.gfx.maximizeCanvasSize(false);
+          // do a single main loop step and request the next step
+          function step() 
+          {  
+            // start a new frame and clear screen
+            Shaku.startFrame();
+            Shaku.gfx.clear(Shaku.utils.Color.cornflowerblue);
 
-          // update and draw world
-          _world.step();
+            // protection against bugs due to low fps
+            if (Shaku.gameTime.delta > (1 / 16)) {
+              Shaku.endFrame();
+              Shaku.requestAnimationFrame(step);
+              return;            
+            }
 
-          // draw fps
-          let fpsString = 'FPS: ' + Shaku.getFpsCount().toString() + '\nAvg Frame Time: ' + (Math.round(Shaku.getAverageFrameTime() * 100) / 100.0) + '\nDraw Calls: ' + Shaku.gfx.drawCallsCount;
-          let fps = Shaku.gfx.buildText(fontTexture, fpsString, 32, Shaku.utils.Color.white);
-          fps.position.set(12, 20);
-          Shaku.gfx.drawGroup(fps, true);
+            // make fullscreen
+            Shaku.gfx.maximizeCanvasSize(false);
 
-          // end frame and request next step
-          Shaku.endFrame();
-          Shaku.requestAnimationFrame(step);
+            // update and draw world
+            _world.step();
+
+            // draw fps
+            let fpsString = 'FPS: ' + Shaku.getFpsCount().toString() + '\nAvg Frame Time: ' + (Math.round(Shaku.getAverageFrameTime() * 100) / 100.0) + '\nDraw Calls: ' + Shaku.gfx.drawCallsCount;
+            let fps = Shaku.gfx.buildText(fontTexture, fpsString, 32, Shaku.utils.Color.white);
+            fps.position.set(12, 20);
+            Shaku.gfx.drawGroup(fps, true);
+
+            // end frame and request next step
+            Shaku.endFrame();
+            Shaku.requestAnimationFrame(step);
+          }
+
+          // start main loop
+          step();
         }
-
-        // start main loop
-        step();
       }
     })();
 })();

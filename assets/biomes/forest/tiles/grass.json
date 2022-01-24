@@ -1,13 +1,14 @@
 {
     "texture": "tiles.png",
+    "overlay_texture": "tiles_overlay.png",
     "source": [0,256,256,256],
     "layer": 1,
     "objects": [
             {"type": "dry_foglie", "spread": 0.0015}, 
             {"type": "foglie", "spread": 0.01}, 
             {"type": "rock", "spread": 0.0035}, 
-            {"type": "palm_tree", "spread": 0.0025},
+            {"type": "palm_tree", "spread": 0.0015},
             {"type": "bush", "spread": 0.025},
-            {"type": "tree", "spread": 0.015}
+            {"type": "tree", "spread": 0.0165}
         ]
 }

@@ -1,6 +1,3 @@
-const ObjectType = require("./object_type");
-
-
 /**
  * A world static object.
  */
@@ -11,19 +8,22 @@ class StaticObject
      */
     constructor(type, position, objectSpriteGroups, collision)
     {
+        let srandom = new Shaku.utils.SeededRandom(Math.abs(position.x * 10000000 + position.y * 1.1237));
         this._type = type;
         this.position = position;
 
         // random scale
-        this._scale = 2 + Math.random();
+        this._scale = 2 + srandom.random();
 
         // init a new sprite
+        this._sprites = [];
         let initSprite = (sprite, layer) =>
         {
+            this._sprites.push(sprite);
             sprite.position = this.position;
-            sprite.rotation = Math.random() * Math.PI * 2;
+            sprite.rotation = srandom.random() * Math.PI * 2;
             sprite.size = sprite.sourceRect.getSize().mul(this._scale);
-            objectSpriteGroups[layer].add(sprite);
+            objectSpriteGroups[layer].add(sprite); 
 
             // add shadow
             if (layer >= 1) {
@@ -39,13 +39,13 @@ class StaticObject
 
         // generate base sprite
         {
-            let sprite = type.generateBaseSprite();
+            let sprite = type.generateBaseSprite(srandom);
             initSprite(sprite, type.layer);
         }
 
         // generate top sprite
         if (type.gotTopTexture) {
-            let sprite = type.generateTopSprite();
+            let sprite = type.generateTopSprite(srandom);
             initSprite(sprite, type.layer + 1);
         }
 

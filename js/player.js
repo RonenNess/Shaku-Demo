@@ -19,6 +19,22 @@ class Player
         this.world = world;
         this.collision = new Shaku.collision.CircleShape(new Shaku.utils.Circle(this._sprite.position), 30);
         world.collision.addShape(this.collision);
+
+        this.lerpToPosition = null;
+        this.lerpToDirection = null;
+        this._updateTimestamp = (new Date()).getTime();
+
+        this._animFactor = Math.random() * 10;
+
+        this.direction = 0;
+    }
+
+    /**
+     * Destroy this player object.
+     */
+    destroy()
+    {
+        this.collision.remove();
     }
 
     /**
@@ -47,17 +63,50 @@ class Player
     }
 
     /**
+     * Get if should remove this player instance because its not being updated from server.
+     */
+    shouldBeRemoved()
+    {
+        return ((new Date()).getTime() - this._updateTimestamp) > 10 * 1000;
+    }
+
+    /**
+     * Apply updates from server.
+     */
+    setUpdateFromServer(position, direction)
+    {
+        this.lerpToPosition = position;
+        this.lerpToDirection = direction;
+        this._updateTimestamp = (new Date()).getTime();
+    }
+
+    /**
      * Update and draw player.
      */
     step()
     {
-        // set rotation to mouse position
-        let center = Shaku.gfx.getCanvasSize().div(2);
-        this._sprite.rotation = center.radiansTo(Shaku.input.mousePosition);
+        // set sprite rotation to direction
+        this._sprite.rotation = this.direction;
 
         // do walking animation
         if (this.walking) {
             this._sprite.rotation += Math.sin(Shaku.gameTime.elapsed * 8) / 14;
+        }
+
+        // lerp to position / direction
+        if (this.lerpToPosition) {
+            let targetDistance = this.position.distanceTo(this.lerpToPosition);
+            if (targetDistance < 100 && targetDistance > 1)
+            {
+                this.position = Shaku.utils.Vector2.lerp(this.position, this.lerpToPosition, Shaku.gameTime.delta * 7.5);
+            }
+            else {
+                this.position.copy(this.lerpToPosition.floor());
+                this.lerpToPosition = null;
+            }
+        }
+        if (this.lerpToDirection !== null) {
+            this.direction = Shaku.utils.MathHelper.lerpRadians(this.direction, this.lerpToDirection, Shaku.gameTime.delta * 12.5);
         }
 
         // update collision shape
@@ -78,7 +127,7 @@ class Player
         }
 
         // do scaling animation
-        let size = 160 +  Math.cos(Shaku.gameTime.elapsed * 2) * 2.25;
+        let size = 160 +  Math.cos(this._animFactor + Shaku.gameTime.elapsed * 2) * 2.25;
         this._sprite.size.set(size, size);
 
         // draw sprite

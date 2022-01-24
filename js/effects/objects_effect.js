@@ -1,9 +1,9 @@
 
 /**
- * Define our custom main effect.
+ * Define our custom main effect to draw objects.
  * This effect works like the basic effect, but with 2d parallax.
  */
-class MainEffect extends Shaku.gfx.BasicEffect
+class ObjectsEffect extends Shaku.gfx.BasicEffect
 {
     /**
      * Override the vertex shader for our custom effect.
@@ -54,4 +54,4 @@ void main(void) {
 
 
 // export main effect
-module.exports = MainEffect;
+module.exports = ObjectsEffect;

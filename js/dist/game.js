@@ -1153,24 +1153,34 @@ class World
         let screenCenter = Shaku.gfx.getCanvasSize().div(2);
         this.player.direction = screenCenter.radiansTo(Shaku.input.mousePosition);
 
-        // do controls - walking
+        // reset walking state and calculate walking speed
         this.player.walking = false;
         let moveSpeed = Shaku.gameTime.delta * 125;
-        if (Shaku.input.down('left') || Shaku.input.down('a')) { 
-            this.player.position.x -= moveSpeed;
+
+        // do controls - walking with mouse
+        if (Shaku.input.down('mouse_left')) {
             this.player.walking = true;
+            let walkVector = this.cameraPosition.add(Shaku.input.mousePosition).sub(this.player.position).normalized();
+            this.player.position.addSelf(walkVector.mul(moveSpeed, moveSpeed));
         }
-        if (Shaku.input.down('right') || Shaku.input.down('d')) { 
-            this.player.position.x += moveSpeed;
-            this.player.walking = true;
-        }
-        if (Shaku.input.down('up') || Shaku.input.down('w')) { 
-            this.player.position.y -= moveSpeed;
-            this.player.walking = true;
-        }
-        if (Shaku.input.down('down') || Shaku.input.down('s')) { 
-            this.player.position.y += moveSpeed;
-            this.player.walking = true;
+        // do controls - walking with keyboard
+        else {
+            if (Shaku.input.down('left') || Shaku.input.down('a')) { 
+                this.player.position.x -= moveSpeed;
+                this.player.walking = true;
+            }
+            if (Shaku.input.down('right') || Shaku.input.down('d')) { 
+                this.player.position.x += moveSpeed;
+                this.player.walking = true;
+            }
+            if (Shaku.input.down('up') || Shaku.input.down('w')) { 
+                this.player.position.y -= moveSpeed;
+                this.player.walking = true;
+            }
+            if (Shaku.input.down('down') || Shaku.input.down('s')) { 
+                this.player.position.y += moveSpeed;
+                this.player.walking = true;
+            }
         }
 
         // update camera position

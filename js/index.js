@@ -32,12 +32,6 @@ const _world = new World();
           // start world
           _world.start();
 
-          // start timer to update server
-          setInterval(() => {
-            let player = _world.player;
-            socket.emit("update", [Math.round(player.position.x), Math.round(player.position.y), Math.round(player.direction * 1000)]);
-          }, 1000 / 24);
-
           // do a single main loop step and request the next step
           function step() 
           {  

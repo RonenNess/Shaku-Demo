@@ -40,7 +40,7 @@ const _world = new World();
             Shaku.gfx.clear(Shaku.utils.Color.cornflowerblue);
 
             // protection against bugs due to low fps
-            if (Shaku.gameTime.delta > (1 / 16)) {
+            if (Shaku.gameTime.delta > 1) {
               Shaku.endFrame();
               Shaku.requestAnimationFrame(step);
               return;            

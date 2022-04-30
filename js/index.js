@@ -56,7 +56,7 @@ const _world = new World();
             let fpsString = 'FPS: ' + Shaku.getFpsCount().toString() + '\nAvg Frame Time: ' + (Math.round(Shaku.getAverageFrameTime() * 100) / 100.0) + '\nDraw Calls: ' + Shaku.gfx.drawCallsCount;
             let fps = Shaku.gfx.buildText(fontTexture, fpsString, 32, Shaku.utils.Color.white);
             fps.position.set(12, 20);
-            Shaku.gfx.drawGroup(fps, true);
+            Shaku.gfx.drawGroup(fps);
 
             // end frame and request next step
             Shaku.endFrame();

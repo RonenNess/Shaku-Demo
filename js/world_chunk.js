@@ -183,7 +183,7 @@ class WorldChunk
             let oldPosition = group.position.clone();
             group.scale.mulSelf(sizeFactor, sizeFactor);
             group.position.mulSelf(sizeFactor, sizeFactor);
-            Shaku.gfx.drawGroup(group, true);
+            Shaku.gfx.drawGroup(group);
             group.scale.copy(oldScale);
             group.position.copy(oldPosition);
         }
@@ -205,7 +205,7 @@ class WorldChunk
         let group = this._tileSprites[layer];
         if (group.count) {
             if (effect) { effect.uniforms.overlayTexture(this._tileSprites[layer]._sprites[0]._secondaryTexture, 1); }
-            Shaku.gfx.drawGroup(group, true, false);
+            Shaku.gfx.drawGroup(group, true);
         }
     }
 
@@ -214,7 +214,7 @@ class WorldChunk
      */
     drawObjects(layer)
     {
-        Shaku.gfx.drawGroup(this._objectsSprites[layer], true, false); // <-- TODO BUT WITH CULLING!!!
+        Shaku.gfx.drawGroup(this._objectsSprites[layer], true);
     }
 
     /**

@@ -471,10 +471,10 @@ class World
         let coordsValue = this.player.position.div(areaSize).floor();
         let coords = Shaku.gfx.buildText(this._fontTexture, coordsValue.x + ',' + coordsValue.y, 18, Shaku.utils.Color.black);
         coords.position.set(screenSize.x - mapSize + 5, 20);
-        Shaku.gfx.drawGroup(coords, true);
+        Shaku.gfx.drawGroup(coords, false);
         coords.setColor(Shaku.utils.Color.white);
         coords.position.addSelf(2,2);
-        Shaku.gfx.drawGroup(coords, true);
+        Shaku.gfx.drawGroup(coords, false);
     }
 
     /**

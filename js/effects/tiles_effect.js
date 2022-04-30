@@ -18,9 +18,6 @@ attribute vec4 color;
 uniform mat4 projection;
 uniform mat4 world;
 
-uniform vec2 uvOffset;
-uniform vec2 uvScale;
-
 varying vec2 v_texCoord;
 varying vec4 v_color;
 varying vec2 v_overlayCoord;
@@ -28,7 +25,7 @@ varying vec2 v_overlayCoord;
 void main(void) {
     gl_Position = projection * world * vec4(position, 1.0);
     v_overlayCoord = position.xy / 1000.0;
-    v_texCoord = uvOffset + (coord * uvScale);
+    v_texCoord = coord;
     v_color = color;
 }
         `;

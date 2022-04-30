@@ -18,9 +18,6 @@ attribute vec4 color;
 uniform mat4 projection;
 uniform mat4 world;
 
-uniform vec2 uvOffset;
-uniform vec2 uvScale;
-
 uniform vec2 screenCenter;
 uniform float parallaxFactor;
 
@@ -33,7 +30,7 @@ void main(void) {
     vec2 paralFactor = (absPosition.xy - screenCenter.xy) * 0.05 * parallaxFactor;
     absPosition.xy += paralFactor;
     gl_Position = (projection * absPosition);
-    v_texCoord = uvOffset + (coord * uvScale);
+    v_texCoord = coord;
     v_color = color;
 }
         `;
